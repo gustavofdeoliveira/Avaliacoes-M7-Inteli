@@ -1,0 +1,34 @@
+version: '3'
+
+
+# Criando as services front e back
+services:
+# nome da service
+  backend:
+  # o caminho do que sera buildado
+    build: 
+      context: ./backend
+    # automatizando o processo de deploy no dockerhub
+    image: gustavofdeoliveira/backend-avaliacoes-m7-inteli
+    # caso de erro no processo de start, reiniciar sempre
+    restart: always
+    #porta que deve ser iniciada
+    ports:
+      - "8000:8000"
+# nome da service
+  frontend:
+  # o caminho do que sera buildado
+    build: 
+      context: ./frontend
+    # automatizando o processo de deploy no dockerhub
+    image: gustavofdeoliveira/frontend-avaliacoes-m7-inteli
+    # caso de erro no processo de start, reiniciar sempre
+    restart: always
+    #porta que deve ser iniciada
+    ports:
+      - "3000:3000"
+    # dependencias do front
+    depends_on:
+      - backend
+
+  
